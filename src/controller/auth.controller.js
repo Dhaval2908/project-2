@@ -16,7 +16,7 @@
             user.newuser(req.body,(error,result)=>{
                 console.log(result)
                 if (error) {
-                    res.json({'message':'Error occured Please try Again'})
+                    res.json(error)
                    
                 } else {
                     const uname = req.body.username;
@@ -54,11 +54,7 @@ exports.login = async function(req, res){
                  
               } else {
                 let uname
-                result.forEach(data => {
-                   uname =data.emailid;
-                  console.log(uname)
-                })
-                res.result
+                uname=result.emailid
                   res.send({message:"login SUCCEES with "+[uname]})
                  // req.("Success",`Welcome ${uname} to INTERNS-HUB!`);
                  

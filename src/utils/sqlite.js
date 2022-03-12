@@ -1,30 +1,32 @@
-var mysql = require('mysql');
-var con = mysql.createConnection({
-  host: 'localhost', // Replace with your host name
-  user: 'root',      // Replace with your database username
-  password: '',      // Replace with your database password
-  database: 'test' // // Replace with your database Name
-}); 
-con.connect(function(err) {
-  if (err) throw err;
+// var mysql = require('mysql');
+// var con = mysql.createConnection({
+//   host: 'localhost', // Replace with your host name
+//   user: 'root',      // Replace with your database username
+//   password: '',      // Replace with your database password
+//   database: 'test' // // Replace with your database Name
+// }); 
+// con.connect(function(err) {
+//   if (err) throw err;
 
-  console.log("connected");
+//   console.log("connected");
+// });
+// module.exports = con;
+
+
+const sqlite3 = require('sqlite3')
+let db = new sqlite3.Database('../test.db',(err)=>{
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log('Connected to the  SQlite database.');
 });
-module.exports = con;
+db.run('CREATE TABLE IF NOT EXISTS user (emailid TEXT,password TEXT,id TEXT)',(err)=>{
+  if (err) {
+    return console.error(err.message);
+  }
+});
 
 
-// const sqlite3 = require('sqlite3')
-// let db = new sqlite3.Database('../test.db',(err)=>{
-//   if (err) {
-//     return console.error(err.message);
-//   }
-//   console.log('Connected to the in-memory SQlite database.');
-// });
-// db.run('CREATE TABLE IF NOT EXISTS user (emailid TEXT,password TEXT)',(err)=>{
-//   if (err) {
-//     return console.error(err.message);
-//   }
-// });
 
 // // db.run('INSERT INTO user (emailid,password) VALUES ("ghanshyam@gmail.com","123456789")')
 
@@ -41,3 +43,4 @@ module.exports = con;
 
 // });
 // db.close();
+module.exports = db;
