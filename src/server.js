@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(bodyParser.json());
 app.use(morgan('dev'))
-middleware(app);
+// middleware(app);
 router(app);
 
 app.listen(PORT, () => {

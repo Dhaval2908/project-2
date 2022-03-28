@@ -1,5 +1,6 @@
 
   var user = require("../models/auth.models")
+  const jwt = require("jsonwebtoken")
   //student registration post
   exports.register = async function(req, res){
    
@@ -19,8 +20,15 @@
                     res.json(error)
                    
                 } else {
-                    const uname = req.body.username;
-                    res.json({message:"SUCCEES"})
+                    const uname = req.body.emailid;
+                    
+                    console.log(uname)
+                    jwt.sign(req.body, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                      res.json({
+                        token
+                      });
+                    });
+                    // res.json({message:${}})
                    // req.("Success",`Welcome ${uname} to INTERNS-HUB!`);
                    
                 }
